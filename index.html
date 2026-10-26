@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Natalia Agudelo Portafolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: editorial portfolio. Slug labels like a newsroom, highlighter marks on key words, case studies with real work up front. */
+:root {
+  --bg: #F7F7F4;
+  --surface: #FFFFFF;
+  --ink: #17182A;
+  --muted: #55566A;
+  --line: #E2E2DC;
+  --mark: #FFCC1A;
+  --mark-ink: #17182A;
+  --chip: #EDEDE7;
+  --contact-item: rgba(255, 255, 255, 0.1);
+  --font-display: 'Bricolage Grotesque', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --radius: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12131C; --surface: #1B1C28; --ink: #EEEEF4; --muted: #A6A7B8; --line: #2C2D3B;
+    --mark: #F5C21B; --mark-ink: #12131C; --chip: #242536; --contact-item: rgba(0, 0, 0, 0.08); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12131C; --surface: #1B1C28; --ink: #EEEEF4; --muted: #A6A7B8; --line: #2C2D3B;
+  --mark: #F5C21B; --mark-ink: #12131C; --chip: #242536; --contact-item: rgba(0, 0, 0, 0.08); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--mark); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1160px; margin: 0 auto; }
+main.wrap { overflow-x: clip; }
+
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+.slug { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.mark { background: linear-gradient(transparent 52%, var(--mark) 52%, var(--mark) 92%, transparent 92%); padding: 0 0.08em; }
+.mark-solid { background: var(--mark); color: var(--mark-ink); padding: 0 0.18em; border-radius: 6px; }
+
+/* Nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 20px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.brand-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--mark); }
+.nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; flex-wrap: wrap; }
+.nav ul a { text-decoration: none; font-weight: 500; font-size: 15px; color: var(--muted); }
+.nav ul a:hover { color: var(--ink); }
+
+/* Hero */
+.hero { overflow-x: clip; padding-block: 64px 56px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(44px, 7vw, 88px); font-weight: 800; }
+.hero .lead { font-size: 20px; color: var(--muted); max-width: 34em; margin: 24px 0 0; }
+.roles { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; padding: 0; list-style: none; }
+.roles li { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: 15px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 28px; color: var(--muted); font-size: 15px; }
+.facts span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--mark); margin-right: 8px; vertical-align: 2px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; border: 1.5px solid var(--ink); }
+.btn-primary { background: var(--ink); color: var(--bg); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn:hover { transform: translateY(-1px); }
+/* Hero motion: staggered rise on load, rotating word that flips in 3D */
+.hero h1 .line { display: block; }
+.hero-in { animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--i, 0) * 90ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+.rotator { display: inline-grid; perspective: 700px; vertical-align: bottom; }
+.rotator .w { grid-area: 1 / 1; justify-self: start; display: inline-block; background: var(--mark); color: var(--mark-ink); padding: 0 0.16em; border-radius: 0.12em; white-space: nowrap; transform-origin: 50% 50% -0.45em; transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.65s; }
+.rotator .w:not(.on) { opacity: 0; transform: rotateX(-95deg); }
+.rotator .w.out { opacity: 0; transform: rotateX(95deg); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* 3D scene: cards at different depths, tilted by the pointer and shifted by scroll */
+.scene { position: relative; height: 560px; perspective: 1400px; }
+.scene-inner { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.25s ease-out; }
+.hero-visual { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.scene { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.scene.dragging { cursor: grabbing; }
+.scene.dragging .scene-inner { transition: none; }
+.scene-controls { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.icon-btn { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; }
+.icon-btn:hover { border-color: var(--ink); }
+.scene-hint { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+.card { position: absolute; width: 46%; transform-style: preserve-3d; transform: translateZ(var(--z, 0px)) rotate(var(--r, 0deg)); }
+.card img { display: block; width: 100%; border-radius: 14px; box-shadow: 0 26px 50px rgba(18, 18, 40, 0.24); animation: float 6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+.badge { position: absolute; right: 2%; top: -3%; width: 132px; height: 132px; transform: translateZ(220px); border-radius: 50%; background: var(--ink); display: grid; place-items: center; }
+.badge svg { position: absolute; inset: 0; animation: spin 16s linear infinite; }
+.badge text { fill: var(--bg); font-family: var(--font-mono); font-size: 10.4px; letter-spacing: 2.2px; }
+.badge-dot { width: 26px; height: 26px; border-radius: 50%; background: var(--mark); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Marquee of skills */
+.marquee { overflow: hidden; border-block: 1px solid var(--line); min-width: 0; }
+.marquee .track { display: flex; gap: 36px; width: max-content; padding-block: 18px; animation: scroll 38s linear infinite; font-family: var(--font-display); font-size: clamp(22px, 3vw, 32px); font-weight: 700; white-space: nowrap; }
+.marquee .track span { display: inline-flex; align-items: center; gap: 36px; }
+.marquee .track span::after { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--mark); }
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* Scroll reveal (only for content below the first screen) and hover tilt */
+.cases, .timeline { perspective: 1600px; }
+.reveal { transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.2, 0.7, 0.2, 1); transform-origin: 50% 0; }
+.reveal.pre { opacity: 0; transform: translateY(56px) rotateX(7deg); }
+.tilt { transition: transform 0.3s ease; will-change: transform; }
+
+/* Papelería 1A gallery */
+.g-pap { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); align-items: center; gap: 24px; }
+.pap-phone img { border-radius: 0; }
+.pap-side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+/* Contact cards */
+.contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.c-card { background: var(--contact-item); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; }
+.c-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; }
+.c-value { font-size: 19px; font-weight: 600; overflow-wrap: anywhere; user-select: all; }
+a.copy { display: inline-flex; align-items: center; text-decoration: none; }
+.contact-foot { margin: 0; opacity: 0.8; font-size: 17px; }
+
+/* Video reels */
+.reels { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; align-items: flex-start; }
+.reel { width: min(250px, 100%); margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.reel-frame { background: var(--ink); border-radius: 30px; padding: 9px; transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); box-shadow: 0 24px 50px rgba(18, 18, 40, 0.22); }
+.reel:hover .reel-frame { transform: translateY(-6px); }
+.reel video { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 22px; background: #0B0B14; }
+.reel figcaption { font-size: 14.5px; color: var(--muted); text-align: center; }
+.reel figcaption b { display: block; color: var(--ink); font-size: 16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery .phone-screen img { animation: none; }
+  .hero-in, .card img, .badge svg, .marquee .track { animation: none; }
+  .rotator .w, .scene-inner, .reveal, .tilt, .reel-frame { transition: none; }
+}
+
+/* Section heads */
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.sec-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.sec-head h2 { font-size: clamp(34px, 4.6vw, 54px); font-weight: 800; }
+.sec-head p { margin: 0; color: var(--muted); max-width: 40em; }
+
+/* Filters */
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+.filters button { font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--mark); border-color: var(--mark); color: var(--mark-ink); }
+
+/* Cases */
+.cases { display: flex; flex-direction: column; gap: 28px; }
+.case { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 40px; }
+.case-info { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.case-info h3 { font-size: clamp(30px, 3.6vw, 42px); font-weight: 800; }
+.case-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--chip); border-radius: 6px; padding: 5px 9px; color: var(--ink); }
+.case-info p { margin: 0; color: var(--muted); }
+.did { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.did li { padding-left: 22px; position: relative; }
+.did li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 10px; height: 3px; background: var(--ink); border-radius: 2px; }
+.note { font-size: 13.5px; color: var(--muted); }
+
+.gallery { display: grid; gap: 12px; min-width: 0; }
+.g-brand { grid-template-columns: minmax(0, 0.95fr) repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
+.g-brand .phone-wrap { grid-row: span 2; align-self: center; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
+.gallery button { all: unset; cursor: zoom-in; display: block; border-radius: 12px; overflow: hidden; }
+.gallery button:focus-visible { outline: 3px solid var(--mark); outline-offset: 3px; }
+.gallery img, .gallery video { display: block; width: 100%; height: auto; border-radius: 12px; }
+.gallery .phone { display: block; width: 100%; background: var(--ink); border-radius: 28px; padding: 8px; cursor: zoom-in; box-shadow: 0 22px 44px rgba(18, 18, 40, 0.2); }
+.phone-screen { display: block; position: relative; aspect-ratio: 9 / 19.5; border-radius: 21px; overflow: hidden; background: #FFFFFF; }
+.gallery .phone-screen img { position: absolute; left: 0; top: 0; width: 100%; height: auto; border-radius: 0; animation: phone-scroll 24s ease-in-out infinite; }
+.gallery .phone:hover .phone-screen img, .gallery .phone:focus-visible .phone-screen img { animation-play-state: paused; }
+@keyframes phone-scroll { 0%, 8% { transform: translateY(0); } 46%, 54% { transform: translateY(var(--dist, 0px)); } 92%, 100% { transform: translateY(0); } }
+.phone-cap { font-size: 13px; color: var(--muted); text-align: center; }
+dialog.tall { max-height: 92vh; overflow: auto; }
+dialog.tall img { max-height: none; width: min(440px, 88vw); }
+.g-two { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+.g-web { grid-template-columns: minmax(0, 1fr); }
+.browser { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
+.browser-bar { display: flex; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--chip); }
+.browser-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); display: block; }
+.browser img { border-radius: 0; }
+
+/* Experience timeline: real chronological order */
+.timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.timeline li { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 24px; padding-block: 24px; border-bottom: 1px solid var(--line); }
+.timeline li:last-child { border-bottom: 0; }
+.year { font-family: var(--font-mono); font-size: 15px; font-variant-numeric: tabular-nums; padding-top: 4px; }
+.timeline h3 { font-size: 24px; font-weight: 700; }
+.timeline .org { color: var(--muted); font-weight: 500; }
+.timeline ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+
+.two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.edu { list-style: none; margin: 0; padding: 0; }
+.edu li { display: flex; justify-content: space-between; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.edu b { font-weight: 600; }
+.edu span { color: var(--muted); }
+.edu .year { white-space: nowrap; }
+.skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.skills h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+.skills ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.skills li { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 15px; }
+.langs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.langs div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 20px; }
+.langs b { display: block; font-family: var(--font-display); font-size: 20px; }
+.langs span { color: var(--muted); font-size: 14px; }
+
+.about { font-size: 21px; line-height: 1.55; max-width: 36em; margin: 0; }
+
+/* Contact */
+.contact { background: var(--ink); color: var(--bg); border-radius: 28px; padding: 56px 48px; display: flex; flex-direction: column; gap: 24px; margin-bottom: 48px; }
+.contact h2 { font-size: clamp(36px, 5vw, 64px); font-weight: 800; color: var(--bg); }
+.contact .slug { color: var(--bg); opacity: 0.7; }
+.contact-rows { display: flex; flex-wrap: wrap; gap: 16px; }
+.contact-item { display: flex; align-items: center; gap: 12px; background: var(--contact-item); border-radius: 14px; padding: 12px 12px 12px 20px; }
+.contact-item span { font-size: 19px; font-weight: 600; user-select: all; }
+.copy { font: inherit; font-size: 14px; font-weight: 600; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 0; background: var(--mark); color: var(--mark-ink); cursor: pointer; }
+footer { color: var(--muted); font-size: 14px; padding-block: 0 40px; }
+
+/* Lightbox */
+dialog { border: 0; padding: 0; background: transparent; max-width: min(92vw, 1100px); }
+dialog::backdrop { background: rgba(10, 10, 20, 0.82); }
+dialog img { display: block; max-width: 100%; max-height: 86vh; width: auto; border-radius: 12px; margin: 0 auto; }
+.close { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); font: inherit; font-weight: 600; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: #FFFFFF; color: #17182A; cursor: pointer; }
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero { grid-template-columns: minmax(0, 1fr); padding-block: 40px; }
+  .scene { height: 480px; max-width: 520px; width: 100%; margin-inline: auto; }
+  .case { grid-template-columns: minmax(0, 1fr); padding: 24px; gap: 28px; }
+  .two-col, .skills { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .nav ul { gap: 14px; }
+  .scene { height: 400px; }
+  .badge { width: 104px; height: 104px; }
+  .g-brand { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .g-brand .phone-wrap { grid-column: 1 / -1; grid-row: auto; width: min(240px, 100%); justify-self: center; }
+  .timeline li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .contact { padding: 36px 24px; }
+  .contact-item { width: 100%; justify-content: space-between; }
+  .contact-item span { font-size: 16px; overflow-wrap: anywhere; }
+}
+</style>
+<style>body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Principal">
+  <div class="wrap">
+    <a class="brand" href="#inicio"><span class="brand-dot" aria-hidden="true"></span>Natalia Agudelo</a>
+    <ul>
+      <li><a href="#trabajo">Trabajo</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#perfil">Perfil</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap" id="inicio">
+  <header class="hero">
+    <div>
+      <p class="slug hero-in" style="--i:0">Portafolio · Bogotá, Colombia · 2026</p>
+      <h1>
+        <span class="line hero-in" style="--i:1">Hola, soy Natalia.</span>
+        <span class="line hero-in" style="--i:2">Creo <span class="sr-only">marcas, historias, experiencias y videos</span><span class="rotator" aria-hidden="true"><span class="w on">marcas</span><span class="w">historias</span><span class="w">experiencias</span><span class="w">videos</span></span></span>
+        <span class="line hero-in" style="--i:3">que conectan.</span>
+      </h1>
+      <p class="lead hero-in" style="--i:4">Comunicadora social y periodista. Diseño marcas, piezas para redes, videos y páginas web pensadas para las personas que las usan, y mido lo que funciona.</p>
+      <ul class="roles hero-in" style="--i:5" aria-label="Perfiles">
+        <li>Junior Creative</li>
+        <li>UX / UI</li>
+        <li>Comunicación social</li>
+        <li>Marketing digital</li>
+      </ul>
+      <div class="facts hero-in" style="--i:6">
+        <span>Especialización en Marketing Digital (en curso)</span>
+        <span>Inglés y francés avanzado</span>
+      </div>
+      <div class="ctas hero-in" style="--i:7">
+        <a class="btn btn-primary" href="#trabajo">Ver proyectos</a>
+        <a class="btn btn-ghost" href="#contacto">Contactarme</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+    <div class="scene" id="scene" aria-hidden="true">
+      <div class="scene-inner" id="scene-inner">
+        <div class="card" style="left:0; top:6%; --z:-140px; --r:-9deg; --d:-1.2s"><img src="img/nat-06_palabra.jpg" alt=""></div>
+        <div class="card" style="left:54%; top:0; --z:-180px; --r:8deg; --d:-3s"><img src="img/pep-08_reserva.jpg" alt=""></div>
+        <div class="card" style="left:2%; top:42%; --z:40px; --r:-4deg; --d:-2.1s"><img src="img/cal-02_glow.jpg" alt=""></div>
+        <div class="card" style="left:52%; top:40%; --z:20px; --r:5deg; --d:-4.2s"><img src="img/pep-01_volcan.jpg" alt=""></div>
+        <div class="card" style="left:26%; top:16%; width:50%; --z:150px; --r:0deg; --d:-0.5s"><img src="img/nat-01_hero.jpg" alt=""></div>
+        <div class="badge">
+          <svg viewBox="0 0 132 132"><defs><path id="badge-circle" d="M66 66 m-50 0 a50 50 0 1 1 100 0 a50 50 0 1 1 -100 0"></path></defs><text><textPath href="#badge-circle" textLength="306" lengthAdjust="spacing">COMUNICAR · CREAR · CONECTAR ·</textPath></text></svg>
+          <span class="badge-dot"></span>
+        </div>
+      </div>
+    </div>
+    <div class="scene-controls">
+      <button class="icon-btn" type="button" id="rot-left" aria-label="Girar las piezas a la izquierda"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg></button>
+      <span class="scene-hint">Arrastra para girar</span>
+      <button class="icon-btn" type="button" id="rot-right" aria-label="Girar las piezas a la derecha"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 4v5h-5"></path></svg></button>
+      <button class="icon-btn" type="button" id="rot-reset" aria-label="Volver a la posición inicial"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg></button>
+    </div>
+    </div>
+  </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Branding</span><span>Contenido para redes</span><span>UX / UI</span><span>Edición de video</span><span>Copywriting</span><span>Meta Ads</span><span>Google Ads</span><span>Comunicación interna</span><span>Diseño web</span>
+      <span>Branding</span><span>Contenido para redes</span><span>UX / UI</span><span>Edición de video</span><span>Copywriting</span><span>Meta Ads</span><span>Google Ads</span><span>Comunicación interna</span><span>Diseño web</span>
+    </div>
+  </div>
+
+  <section id="trabajo" aria-labelledby="trabajo-t">
+    <div class="sec-head">
+      <p class="slug">Trabajo seleccionado</p>
+      <h2 id="trabajo-t">Proyectos</h2>
+      <p>Identidad de marca, contenido para Instagram, gestión de comunidad y diseño de experiencias web. Toca cualquier imagen para verla en grande.</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filtrar proyectos">
+      <button type="button" id="f-all" data-filter="all" aria-pressed="true">Todo</button>
+      <button type="button" id="f-brand" data-filter="brand" aria-pressed="false">Branding y contenido</button>
+      <button type="button" id="f-social" data-filter="social" aria-pressed="false">Redes sociales</button>
+      <button type="button" id="f-ux" data-filter="ux" aria-pressed="false">UX y web</button>
+      <button type="button" id="f-video" data-filter="video" aria-pressed="false">Edición de video</button>
+    </div>
+
+    <div class="cases">
+      <article class="case" data-cat="brand social">
+        <div class="case-info">
+          <div class="case-meta"><span class="tag">Marca personal</span><span class="tag">Identidad visual</span><span class="tag">Instagram</span></div>
+          <h3>Spanish Teacher Natalia</h3>
+          <p>Marca para clases de español a extranjeros, en todos los niveles. El reto era transmitir confianza y cercanía a alumnos que todavía no hablan el idioma.</p>
+          <ul class="did">
+            <li>Logotipo: burbuja de diálogo con la inicial N, en versión clara y oscura.</li>
+            <li>Sistema visual en amarillo, blanco y negro, con tipografía Sora.</li>
+            <li>9 publicaciones en inglés: gramática, vocabulario, errores comunes y llamados a la acción.</li>
+            <li>Biografía, descripciones con hashtags y vista previa del perfil.</li>
+          </ul>
+        </div>
+        <div class="gallery g-brand">
+          <div class="phone-wrap">
+            <button type="button" class="phone" data-full="img/nat-perfil.jpg" data-tall aria-label="Ver el perfil completo de Spanish Teacher Natalia"><span class="phone-screen"><img src="img/nat-perfil.jpg" alt="Vista previa del perfil de Instagram de Spanish Teacher Natalia con 9 publicaciones"></span></button>
+            <span class="phone-cap">Toca para ver el perfil completo</span>
+          </div>
+          <button type="button" data-full="img/nat-06_palabra.jpg"><img src="img/nat-06_palabra.jpg" alt="Publicación: palabra del día, sobremesa" loading="lazy"></button>
+          <button type="button" data-full="img/nat-07_error.jpg"><img src="img/nat-07_error.jpg" alt="Publicación: error común, embarazada o avergonzada" loading="lazy"></button>
+          <button type="button" data-full="img/nat-08_serestar.jpg"><img src="img/nat-08_serestar.jpg" alt="Publicación: ser vs. estar" loading="lazy"></button>
+          <button type="button" data-full="img/nat-04_niveles.jpg"><img src="img/nat-04_niveles.jpg" alt="Publicación: de Hola a fluido, niveles A1 a C2" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case" data-cat="brand social">
+        <div class="case-info">
+          <div class="case-meta"><span class="tag">Restaurante</span><span class="tag">Rediseño de logo</span><span class="tag">Instagram</span></div>
+          <h3>Pepers Room</h3>
+          <p>Restaurante de autor con el pimiento como protagonista. Partí del logo original del cliente y lo llevé a una presentación más profesional, con un feed de lujo donde predomina el blanco.</p>
+          <ul class="did">
+            <li>Mejora del logo: composición centrada, tipografía nueva y líneas de acento.</li>
+            <li>Ilustraciones de línea propias para cada plato de la carta.</li>
+            <li>9 publicaciones: platos, carta completa, reservas y frase de la casa.</li>
+            <li>Textos de carta y descripciones con tono gastronómico.</li>
+          </ul>
+        </div>
+        <div class="gallery g-brand">
+          <div class="phone-wrap">
+            <button type="button" class="phone" data-full="img/pep-perfil.jpg" data-tall aria-label="Ver el perfil completo de Pepers Room"><span class="phone-screen"><img src="img/pep-perfil.jpg" alt="Vista previa del perfil de Instagram de Pepers Room con 9 publicaciones"></span></button>
+            <span class="phone-cap">Toca para ver el perfil completo</span>
+          </div>
+          <button type="button" data-full="img/pep-03_pasta.jpg"><img src="img/pep-03_pasta.jpg" alt="Publicación: Pasta Fuego Pepers" loading="lazy"></button>
+          <button type="button" data-full="img/pep-08_reserva.jpg"><img src="img/pep-08_reserva.jpg" alt="Publicación: reserva tu mesa" loading="lazy"></button>
+          <button type="button" data-full="img/pep-07_carta.jpg"><img src="img/pep-07_carta.jpg" alt="Publicación: nuestra carta" loading="lazy"></button>
+          <button type="button" data-full="img/pep-09_frase.jpg"><img src="img/pep-09_frase.jpg" alt="Publicación: cada plato lleva un toque de fuego" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case" data-cat="brand social">
+        <div class="case-info">
+          <div class="case-meta"><span class="tag">Salón de uñas</span><span class="tag">Identidad visual</span><span class="tag">Instagram</span></div>
+          <h3>Calip Nails</h3>
+          <p>Salón de uñas con cinco servicios, del manicure express al spa completo. Construí una línea editorial elegante que alterna fondos claros y oscuros para darle ritmo al feed.</p>
+          <ul class="did">
+            <li>Aplicación del logo con silueta femenina en versiones clara y oscura.</li>
+            <li>Sistema visual en rosa empolvado, negro y tipografía Bodoni.</li>
+            <li>9 publicaciones: servicios, menú, tips de cuidado y agenda.</li>
+            <li>Íconos para historias destacadas y descripciones para cada post.</li>
+          </ul>
+        </div>
+        <div class="gallery g-brand">
+          <div class="phone-wrap">
+            <button type="button" class="phone" data-full="img/cal-perfil.jpg" data-tall aria-label="Ver el perfil completo de Calip Nails"><span class="phone-screen"><img src="img/cal-perfil.jpg" alt="Vista previa del perfil de Instagram de Calip Nails con 9 publicaciones"></span></button>
+            <span class="phone-cap">Toca para ver el perfil completo</span>
+          </div>
+          <button type="button" data-full="img/cal-01_express.jpg"><img src="img/cal-01_express.jpg" alt="Publicación: Manicure Express" loading="lazy"></button>
+          <button type="button" data-full="img/cal-06_servicios.jpg"><img src="img/cal-06_servicios.jpg" alt="Publicación: nuestros servicios" loading="lazy"></button>
+          <button type="button" data-full="img/cal-05_vip.jpg"><img src="img/cal-05_vip.jpg" alt="Publicación: Calip VIP Ritual" loading="lazy"></button>
+          <button type="button" data-full="img/cal-09_agenda.jpg"><img src="img/cal-09_agenda.jpg" alt="Publicación: lista para consentirte" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="case" data-cat="social">
+        <div class="case-info">
+          <div class="case-meta"><span class="tag">2023</span><span class="tag">Community Manager</span><span class="tag">Marketing</span></div>
+          <h3>Papelería 1A</h3>
+          <p>Papelería con venta por página web y Rappi. Como Community Manager gestioné su presencia en Instagram de principio a fin.</p>
+          <ul class="did">
+            <li>Planificación y creación de contenido para redes sociales.</li>
+            <li>Piezas gráficas, fotografía de producto y contenido audiovisual.</li>
+            <li>Interacción con la comunidad y seguimiento de métricas para ampliar el alcance de la marca.</li>
+          </ul>
+        </div>
+        <div class="gallery g-pap">
+          <button type="button" data-full="img/papeleria-phone.png" class="pap-phone"><img src="img/papeleria-phone.png" alt="Perfil de Instagram de Papelería 1A en un teléfono" loading="lazy"></button>
+          <div class="pap-side">
+            <button type="button" data-full="img/papeleria-banner.jpg"><img src="img/papeleria-banner.jpg" alt="Portada de Papelería 1A con lápices, libros y útiles escolares" loading="lazy"></button>
+            <p class="note">Portada del perfil: rosa y fucsia de la marca, útiles escolares y el logo 1A al centro.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case" data-cat="brand social">
+        <div class="case-info">
+          <div class="case-meta"><span class="tag">Agencia de marketing</span><span class="tag">Feed</span><span class="tag">Motion</span></div>
+          <h3>Código Lengua</h3>
+          <p>Concepto de marca para una agencia de marketing: "Tu marca tiene un código. Nosotros lo hacemos hablar." Diseñé el feed completo y una animación para presentarlo.</p>
+          <ul class="did">
+            <li>Feed de 9 piezas: manifiesto, servicios, consejos, métricas y llamados a la acción.</li>
+            <li>Paleta violeta y azul noche con detalles de circuito.</li>
+            <li>Video vertical 4:5 para mostrar el feed en movimiento.</li>
+          </ul>
+        </div>
+        <div class="gallery g-two">
+          <button type="button" data-full="img/codigolengua.jpg"><img src="img/codigolengua.jpg" alt="Perfil de Instagram de Código Lengua con 9 publicaciones" loading="lazy"></button>
+          <video src="img/codigolengua.mp4" poster="img/codigolengua-poster.jpg" autoplay muted loop playsinline aria-label="Animación del feed de Código Lengua"></video>
+        </div>
+      </article>
+
+      <article class="case" id="video" data-cat="video social">
+        <div class="case-info">
+          <div class="case-meta"><span class="tag">Edición de video</span><span class="tag">Reels</span><span class="tag">Motion graphics</span></div>
+          <h3>Reels para Código Lengua</h3>
+          <p>Dos videos verticales de 40 segundos que explican servicios digitales en lenguaje de cliente. El reto era contar algo técnico de forma rápida, clara y fácil de seguir sin sonido.</p>
+          <ul class="did">
+            <li>Guion en escenas cortas: problema, solución y resultado.</li>
+            <li>Edición con ritmo de reel, transiciones y textos animados.</li>
+            <li>Subtítulos en pantalla para ver el video sin audio.</li>
+            <li>Simulaciones de interfaz: chat de WhatsApp, página web y panel administrativo.</li>
+          </ul>
+          <p class="note">Toca un video para activar el sonido.</p>
+        </div>
+        <div class="reels">
+          <figure class="reel">
+            <div class="reel-frame"><video src="img/reel-agente.mp4" poster="img/reel-agente.jpg" muted loop playsinline autoplay controls preload="metadata" aria-label="Reel: agente de IA que responde por WhatsApp"></video></div>
+            <figcaption><b>Agente de IA</b>Cotizaciones automáticas por WhatsApp</figcaption>
+          </figure>
+          <figure class="reel">
+            <div class="reel-frame"><video src="img/reel-web.mp4" poster="img/reel-web.jpg" muted loop playsinline autoplay controls preload="metadata" aria-label="Reel: página web inmobiliaria con panel administrativo"></video></div>
+            <figcaption><b>Tu página web</b>Sitio inmobiliario con panel de edición</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="case" data-cat="ux">
+        <div class="case-info">
+          <div class="case-meta"><span class="tag">UX / UI</span><span class="tag">E-commerce</span><span class="tag">HTML · CSS · JS</span></div>
+          <h3>Kala Casa</h3>
+          <p>Tienda en línea de objetos para el hogar hechos en talleres colombianos. Prioricé que el producto se vea primero y que comprar tome pocos pasos.</p>
+          <ul class="did">
+            <li>Navegación por categorías: cocina, mesa, decoración y textiles.</li>
+            <li>Bloques de colección y oferta visibles desde la primera pantalla.</li>
+            <li>Barra de envío gratis y carrito siempre a la vista.</li>
+          </ul>
+        </div>
+        <div class="gallery g-web">
+          <div class="browser"><div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></div><button type="button" data-full="img/kala.jpg"><img src="img/kala.jpg" alt="Página de inicio de Kala Casa" loading="lazy"></button></div>
+        </div>
+      </article>
+
+      <article class="case" data-cat="ux">
+        <div class="case-info">
+          <div class="case-meta"><span class="tag">UX / UI</span><span class="tag">Inmobiliaria</span><span class="tag">Responsive</span></div>
+          <h3>Altamira</h3>
+          <p>Sitio para una inmobiliaria en Bogotá y la Sabana. El buscador es el centro de la experiencia: operación, tipo, zona y precio en una sola barra.</p>
+          <ul class="did">
+            <li>Buscador con filtros pensado para encontrar inmueble en segundos.</li>
+            <li>Tarjetas de inmuebles con precio, ubicación y datos clave a la vista.</li>
+            <li>Llamado a publicar inmueble para captar propietarios.</li>
+          </ul>
+        </div>
+        <div class="gallery g-web">
+          <div class="browser"><div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></div><button type="button" data-full="img/altamira-1.jpg"><img src="img/altamira-1.jpg" alt="Página de inicio de Altamira con buscador de inmuebles" loading="lazy"></button></div>
+          <div class="browser"><div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></div><button type="button" data-full="img/altamira-2.jpg"><img src="img/altamira-2.jpg" alt="Sección de inmuebles destacados de Altamira" loading="lazy"></button></div>
+        </div>
+      </article>
+
+      <article class="case" data-cat="ux">
+        <div class="case-info">
+          <div class="case-meta"><span class="tag">UX / UI</span><span class="tag">Estética</span><span class="tag">Reservas</span></div>
+          <h3>Sálvia Spa</h3>
+          <p>Sitio para un centro de estética integral en Chapinero. Un tono calmado y editorial, con la reserva de cita siempre a un clic.</p>
+          <ul class="did">
+            <li>Jerarquía clara: propuesta, prueba de confianza y botón de reserva.</li>
+            <li>Catálogo de servicios con duración y precio desde.</li>
+            <li>Sección de planes mensuales para fidelizar clientas.</li>
+          </ul>
+        </div>
+        <div class="gallery g-web">
+          <div class="browser"><div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></div><button type="button" data-full="img/salvia-1.jpg"><img src="img/salvia-1.jpg" alt="Página de inicio de Sálvia Spa" loading="lazy"></button></div>
+          <div class="browser"><div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i></div><button type="button" data-full="img/salvia-2.jpg"><img src="img/salvia-2.jpg" alt="Sección de servicios de Sálvia Spa" loading="lazy"></button></div>
+        </div>
+      </article>
+    </div>
+    <p class="note" style="margin-top:20px">Las cifras de seguidores en las vistas previas de perfil son de ejemplo, para mostrar cómo se vería cada cuenta activa.</p>
+  </section>
+
+
+  <section id="perfil" aria-labelledby="perfil-t">
+    <div class="sec-head">
+      <p class="slug">Sobre mí</p>
+      <h2 id="perfil-t">Perfil</h2>
+    </div>
+    <p class="about">Soy comunicadora social y periodista, y estoy cursando una especialización en marketing digital. Uno la <span class="mark">escritura</span>, el <span class="mark">diseño</span> y los <span class="mark">datos</span>: creo contenido y piezas gráficas, administro canales digitales, apoyo campañas en Meta Ads y Google Ads y analizo métricas para mejorar los resultados. Trabajo en español, inglés y francés.</p>
+
+
+    <div class="skills" style="margin-top:48px">
+      <div>
+        <h3>Comunicación y contenidos</h3>
+        <ul>
+          <li>Estrategia de contenidos</li><li>Copywriting</li><li>Redacción y corrección</li><li>Community management</li><li>Comunicación interna</li><li>Cobertura de eventos</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Diseño y UX</h3>
+        <ul>
+          <li>UX / UI</li><li>Wireframes y prototipos</li><li>Piezas gráficas</li><li>Foto y video</li><li>HTML, CSS y JavaScript</li><li>WordPress</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Marketing y herramientas</h3>
+        <ul>
+          <li>Meta Ads</li><li>Google Ads</li><li>Google Analytics</li><li>SEO básico</li><li>Email marketing</li><li>CRM</li><li>Canva</li><li>CapCut</li><li>Adobe</li><li>Excel y Sheets</li><li>Herramientas de IA</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" aria-labelledby="contacto-t" style="border-top:0;padding-block:24px 0">
+    <div class="contact">
+      <p class="slug" style="margin:0">Contacto</p>
+      <h2 id="contacto-t">¿Tu marca tiene algo que decir? Hagamos que se escuche.</h2>
+      <div class="contact-grid">
+        <div class="c-card"><span class="c-label">Correo</span><span class="c-value">Amv091@hotmail.com</span><button class="copy" type="button" data-copy="Amv091@hotmail.com">Copiar correo</button></div>
+        <div class="c-card"><span class="c-label">Teléfono</span><span class="c-value">311 232 5355</span><button class="copy" type="button" data-copy="3112325355">Copiar número</button></div>
+        <div class="c-card"><span class="c-label">LinkedIn</span><span class="c-value">in/nataagudelo</span><a class="copy" href="https://co.linkedin.com/in/nataagudelo" target="_blank" rel="noopener">Ver perfil</a></div>
+      </div>
+      <p class="contact-foot">Bogotá, Colombia · Tú traes la marca; yo pongo las ideas, el diseño y los datos.</p>
+    </div>
+  </section>
+  <footer>Natalia Agudelo · Comunicación Social y Periodismo · 2026</footer>
+</main>
+
+<dialog id="lightbox" aria-label="Imagen ampliada">
+  <button class="close" type="button" id="lb-close">Cerrar</button>
+  <img id="lb-img" alt="">
+</dialog>
+
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.filters button');
+  var cases = document.querySelectorAll('.case');
+  function apply(f) {
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.filter === f)); });
+    cases.forEach(function (c) { c.hidden = f !== 'all' && c.dataset.cat.split(' ').indexOf(f) === -1; });
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.filter); }); });
+
+  var dlg = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lb-img');
+  document.querySelectorAll('.gallery button[data-full]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var img = b.querySelector('img');
+      dlg.classList.toggle('tall', b.hasAttribute('data-tall'));
+      lbImg.src = b.dataset.full;
+      lbImg.alt = img ? img.alt : '';
+      if (dlg.showModal) dlg.showModal();
+    });
+  });
+  document.getElementById('lb-close').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var text = b.dataset.copy;
+      var label = b.dataset.label || b.textContent;
+      b.dataset.label = label;
+      function done() { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = label; }, 1800); }
+      function fallback() {
+        var span = b.previousElementSibling;
+        var r = document.createRange(); r.selectNodeContents(span);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        b.textContent = 'Seleccionado';
+        setTimeout(function () { b.textContent = label; }, 1800);
+      }
+      try {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } catch (e) { fallback(); }
+    });
+  });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Phone previews: scroll the long profile screenshot inside a real-proportion screen
+  function setDist(img) {
+    var screen = img.parentElement;
+    var d = img.offsetHeight - screen.clientHeight;
+    img.style.setProperty('--dist', (d > 0 ? -d : 0) + 'px');
+  }
+  var phoneImgs = document.querySelectorAll('.phone-screen img');
+  phoneImgs.forEach(function (img) {
+    if (img.complete) setDist(img); else img.addEventListener('load', function () { setDist(img); });
+  });
+  window.addEventListener('resize', function () { phoneImgs.forEach(setDist); });
+
+  // Rotating word in the headline
+  var words = document.querySelectorAll('.rotator .w');
+  var wi = 0;
+  if (!reduce && words.length > 1) {
+    setInterval(function () {
+      var cur = words[wi];
+      cur.classList.remove('on'); cur.classList.add('out');
+      setTimeout(function () { cur.classList.remove('out'); }, 700);
+      wi = (wi + 1) % words.length;
+      words[wi].classList.add('on');
+    }, 2200);
+  }
+
+  // 3D scene: drag or buttons to rotate; mouse adds a light tilt; cards at different depths give the parallax
+  var scene = document.getElementById('scene');
+  var inner = document.getElementById('scene-inner');
+  var touch = window.matchMedia('(hover: none)').matches;
+  var dragRy = 0, dragRx = 0, tx = 0, ty = 0, userMoved = false;
+  var dragging = false, sx = 0, sy = 0, startRy = 0, startRx = 0;
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function apply(rx, ry) {
+    inner.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+    inner.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+  }
+  function setStatic() { apply(dragRx, dragRy); }
+
+  scene.addEventListener('pointerdown', function (e) {
+    dragging = true; userMoved = true;
+    sx = e.clientX; sy = e.clientY; startRy = dragRy; startRx = dragRx;
+    try { scene.setPointerCapture(e.pointerId); } catch (err) {}
+    scene.classList.add('dragging');
+  });
+  scene.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    dragRy = clamp(startRy + (e.clientX - sx) * 0.35, -70, 70);
+    dragRx = clamp(startRx - (e.clientY - sy) * 0.25, -30, 30);
+    if (reduce) setStatic();
+  });
+  function endDrag() { dragging = false; scene.classList.remove('dragging'); }
+  scene.addEventListener('pointerup', endDrag);
+  scene.addEventListener('pointercancel', endDrag);
+
+  function nudge(d) { userMoved = true; dragRy = clamp(dragRy + d, -70, 70); if (reduce) setStatic(); }
+  document.getElementById('rot-left').addEventListener('click', function () { nudge(-25); });
+  document.getElementById('rot-right').addEventListener('click', function () { nudge(25); });
+  document.getElementById('rot-reset').addEventListener('click', function () { dragRy = 0; dragRx = 0; userMoved = false; if (reduce) setStatic(); });
+
+  if (reduce) return;
+
+  window.addEventListener('pointermove', function (e) {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    tx = (e.clientX / window.innerWidth - 0.5);
+    ty = (e.clientY / window.innerHeight - 0.5);
+  });
+
+  var start = performance.now();
+  function frame(now) {
+    var swayX = 0, swayY = 0;
+    if (touch && !userMoved) {
+      swayX = Math.sin((now - start) / 2400) * 5;
+      swayY = Math.cos((now - start) / 3000) * 8;
+    } else if (!touch && !dragging) {
+      swayX = -ty * 10;
+      swayY = tx * 14;
+    }
+    apply(dragRx + swayX, dragRy + swayY);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // Scroll reveal: only for blocks that start below the first screen, so the page is complete at rest
+  var revealEls = document.querySelectorAll('.sec-head, .case, .timeline li, .skills > div, .two-col, .contact, .about');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.remove('pre'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function (el) {
+      el.classList.add('reveal');
+      if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add('pre'); io.observe(el); }
+    });
+  }
+
+  // Hover tilt on work samples
+  if (!touch) {
+    document.querySelectorAll('.gallery button, .browser').forEach(function (el) {
+      el.classList.add('tilt');
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = 'perspective(900px) rotateY(' + (px * 10).toFixed(2) + 'deg) rotateX(' + (-py * 10).toFixed(2) + 'deg) scale(1.02)';
+      });
+      el.addEventListener('pointerleave', function () { el.style.transform = ''; });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
